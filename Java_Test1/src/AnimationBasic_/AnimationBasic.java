@@ -1,4 +1,4 @@
-package Num1; // 마름모방향 회전 깃헙
+package AnimationBasic_; // 마름모방향 회전 깃헙
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +19,7 @@ public class AnimationBasic extends JPanel implements ActionListener{
    public AnimationBasic() {
       //Image파일 읽어서 image객체로 생성
       //20ms마다 이벤트 발생 timer객체 생성 timer start 시킴
-      File file=new File("spaceship2.png");
+      File file=new File("image/spaceship.jpg");
       try {
          image = ImageIO.read(file);
       }
