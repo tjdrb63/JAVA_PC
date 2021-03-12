@@ -8,7 +8,6 @@ import java.io.IOException;
 /*
  * 		이미지 안보기 기능 추가
  * 
- * 
  * */
 
 public class ImageLabelTest extends JFrame implements ActionListener{
