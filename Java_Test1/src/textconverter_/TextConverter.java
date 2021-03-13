@@ -5,9 +5,9 @@ import java.net.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import com.google.gson.JsonArray;
+
 import com.google.gson.*;
-import com.google.gson.JsonParser;
+
 import org.json.simple.parser.ParseException;
 
 /*
