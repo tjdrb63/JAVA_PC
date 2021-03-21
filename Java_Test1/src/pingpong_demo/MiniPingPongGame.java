@@ -72,7 +72,7 @@ public class MiniPingPongGame extends JFrame implements KeyListener{
         g.setColor(Color.BLUE);
          g.fillRect(673,rightbarY+=rightSpeed,10,100);
        
-         if(!(leftbarY>0 && leftbarY<370)) leftSpeed=0;               // 벽넘기 방지
+         if(!(leftbarY>0 && leftbarY<370)) leftSpeed=0;               // 위아래 벽넘기 방지
        if(!(rightbarY>0 && rightbarY<370)) rightSpeed=0;
       }   
    }
@@ -82,24 +82,24 @@ public class MiniPingPongGame extends JFrame implements KeyListener{
       {      
          if(ballX > 670) 
          {
-            if(ballY > rightbarY-10 && ballY < rightbarY+100) {
+            if(ballY > rightbarY-10 && ballY < rightbarY+100) {   //라켓범위안에 맞았는지 확인
                speedX*=-1;
             }
             else{
                scoreA++;
-               leftSide.setText(Integer.toString(+scoreA)+"  : ");
+               leftSide.setText(Integer.toString(+scoreA)+"  : ");  // 아닐경우 스코어 및 방향 바꿈
                speedX=-2;
             }
          }
          else if(ballY > 450) speedY=-2;
          else if(ballX <= 0) {
-            if(ballY > leftbarY-10 && ballY < leftbarY+100) {         //맞았는지 여부 확인
+            if(ballY > leftbarY-10 && ballY < leftbarY+100) {         // 라켓 범위 안에 맞았는지 여부 확인
                System.out.println("hit");
                speedX*=-1;
             }
             else{ 
                scoreB++;
-               rightSide.setText(Integer.toString(scoreB));
+               rightSide.setText(Integer.toString(scoreB));			//아닐경우 스코어 올리고 방향바꿈
                speedX=2;
             }
         }
@@ -116,14 +116,14 @@ public class MiniPingPongGame extends JFrame implements KeyListener{
 
    @Override
    public void keyPressed(KeyEvent e) {
-      if(e.getKeyCode()==KeyEvent.VK_W)      if(leftbarY>0) leftSpeed=-2;
+      if(e.getKeyCode()==KeyEvent.VK_W)      if(leftbarY>0) leftSpeed=-2;  	   // 키보드 누르기만 하면 움직임
       if (e.getKeyCode()== KeyEvent.VK_S)    if(leftbarY<370) leftSpeed=2;      
       if(e.getKeyCode()==KeyEvent.VK_UP)       if(rightbarY>0) rightSpeed=-2;
       if (e.getKeyCode()== KeyEvent.VK_DOWN) if(rightbarY<370) rightSpeed=2; 
    }
    @Override
    public void keyReleased(KeyEvent e) {
-      if(e.getKeyCode()==KeyEvent.VK_W)   leftSpeed=0;
+      if(e.getKeyCode()==KeyEvent.VK_W)   leftSpeed=0; 						//손가락 땟을떄 속도 0
       if (e.getKeyCode()== KeyEvent.VK_S) leftSpeed=0;
       if(e.getKeyCode()==KeyEvent.VK_UP)     rightSpeed=-0;
       if (e.getKeyCode()== KeyEvent.VK_DOWN)  rightSpeed=0; 
