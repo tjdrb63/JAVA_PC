@@ -4,8 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 /*
- *  W/S  and ¹æÇâÅ° À§/¾Æ·¡·Î Á¶Àı
- *  PPT ¿Í ´Ù¸¥ ¹æ½ÄÀ¸·Î ½Ãµµ.
+ *  W/S  and ë°©í–¥í‚¤ ìœ„/ì•„ë˜ë¡œ ì¡°ì ˆ
+ *  PPT ì™€ ë‹¤ë¥¸ ë°©ì‹ìœ¼ë¡œ ì‹œë„.
  * 
  * 
  * */
@@ -30,7 +30,7 @@ public class MiniPingPongGame extends JFrame implements KeyListener{
       rightSide = new JLabel("0");
       leftSide = new JLabel("0 : ");
       
-      rightSide.setFont(new Font(Font.SANS_SERIF,Font.BOLD,60)); // ½ºÄÚ¾î ÆùÆ® ÁöÁ¤
+      rightSide.setFont(new Font(Font.SANS_SERIF,Font.BOLD,60)); // ìŠ¤ì½”ì–´ í°íŠ¸ ì§€ì •
       leftSide.setFont(new Font(Font.SANS_SERIF,Font.BOLD,60));
       
       this.setFocusable(true);
@@ -72,42 +72,37 @@ public class MiniPingPongGame extends JFrame implements KeyListener{
         g.setColor(Color.BLUE);
          g.fillRect(673,rightbarY+=rightSpeed,10,100);
        
-         if(!(leftbarY>0 && leftbarY<370)) leftSpeed=0;               // À§¾Æ·¡ º®³Ñ±â ¹æÁö
+         if(!(leftbarY>0 && leftbarY<370)) leftSpeed=0;               // ìœ„ì•„ë˜ ë²½ë„˜ê¸° ë°©ì§€
        if(!(rightbarY>0 && rightbarY<370)) rightSpeed=0;
       }   
    }
    
    public void move(JPanel o) {   
-      if(o == ball)
-      {      
-         if(ballX > 670) 
-         {
-            if(ballY > rightbarY-10 && ballY < rightbarY+100) {   //¶óÄÏ¹üÀ§¾È¿¡ ¸Â¾Ò´ÂÁö È®ÀÎ
-               speedX*=-1;
-            }
-            else{
-               scoreA++;
-               leftSide.setText(Integer.toString(+scoreA)+"  : ");  // ¾Æ´Ò°æ¿ì ½ºÄÚ¾î ¹× ¹æÇâ ¹Ù²Ş
-               speedX=-2;
-            }
+       
+	      if(ballY > rightbarY-10 && ballY < rightbarY+100 && ballX > 650) {   //ë¼ì¼“ë²”ìœ„ì•ˆì— ë§ì•˜ëŠ”ì§€ í™•ì¸
+	           speedX*=-1;
+	      }
+	      else if (ballX > 670){
+	           scoreA++;
+	           leftSide.setText(Integer.toString(+scoreA)+"  : ");  // ì•„ë‹ê²½ìš° ìŠ¤ì½”ì–´ ë° ë°©í–¥ ë°”ê¿ˆ
+	           speedX=-2;
+	        }
+	  
+         if(ballY > leftbarY-10 && ballY < leftbarY+100 && ballX < 10) {         // ë¼ì¼“ ë²”ìœ„ ì•ˆì— ë§ì•˜ëŠ”ì§€ ì—¬ë¶€ í™•ì¸
+              System.out.println("hit");
+              speedX*=-1;
          }
-         else if(ballY > 450) speedY=-2;
-         else if(ballX <= 0) {
-            if(ballY > leftbarY-10 && ballY < leftbarY+100) {         // ¶óÄÏ ¹üÀ§ ¾È¿¡ ¸Â¾Ò´ÂÁö ¿©ºÎ È®ÀÎ
-               System.out.println("hit");
-               speedX*=-1;
-            }
-            else{ 
+         else if(ballX < 0){ 
                scoreB++;
-               rightSide.setText(Integer.toString(scoreB));			//¾Æ´Ò°æ¿ì ½ºÄÚ¾î ¿Ã¸®°í ¹æÇâ¹Ù²Ş
+               rightSide.setText(Integer.toString(scoreB));			//ì•„ë‹ê²½ìš° ìŠ¤ì½”ì–´ ì˜¬ë¦¬ê³  ë°©í–¥ë°”ê¿ˆ
                speedX=2;
-            }
-        }
-         else if(ballY < 0) {
-            speedY=2;
-         }
+          }
+     
+         if(ballY > 450 || ballY < 0) speedY*=-1;
+        
+      
          repaint();
-      }
+      
    }
    
    @Override
@@ -116,14 +111,14 @@ public class MiniPingPongGame extends JFrame implements KeyListener{
 
    @Override
    public void keyPressed(KeyEvent e) {
-      if(e.getKeyCode()==KeyEvent.VK_W)      if(leftbarY>0) leftSpeed=-2;  	   // Å°º¸µå ´©¸£±â¸¸ ÇÏ¸é ¿òÁ÷ÀÓ
+      if(e.getKeyCode()==KeyEvent.VK_W)      if(leftbarY>0) leftSpeed=-2;  	   // í‚¤ë³´ë“œ ëˆ„ë¥´ê¸°ë§Œ í•˜ë©´ ì›€ì§ì„
       if (e.getKeyCode()== KeyEvent.VK_S)    if(leftbarY<370) leftSpeed=2;      
       if(e.getKeyCode()==KeyEvent.VK_UP)       if(rightbarY>0) rightSpeed=-2;
       if (e.getKeyCode()== KeyEvent.VK_DOWN) if(rightbarY<370) rightSpeed=2; 
    }
    @Override
    public void keyReleased(KeyEvent e) {
-      if(e.getKeyCode()==KeyEvent.VK_W)   leftSpeed=0; 						//¼Õ°¡¶ô ¶­À»‹š ¼Óµµ 0
+      if(e.getKeyCode()==KeyEvent.VK_W)   leftSpeed=0; 						//ì†ê°€ë½ ë•Ÿì„Â‹Âš ì†ë„ 0
       if (e.getKeyCode()== KeyEvent.VK_S) leftSpeed=0;
       if(e.getKeyCode()==KeyEvent.VK_UP)     rightSpeed=-0;
       if (e.getKeyCode()== KeyEvent.VK_DOWN)  rightSpeed=0; 
