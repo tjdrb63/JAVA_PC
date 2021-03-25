@@ -21,7 +21,8 @@ import java.awt.*;
 		   drawPanel.addMouseListener(this);
 		   drawPanel.addMouseMotionListener(this);
 		   this.add(drawPanel,BorderLayout.CENTER);
-		}
+		
+	   }
 	   
 	   
 	   class BezierPanel extends JPanel{
